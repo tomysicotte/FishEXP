@@ -1,0 +1,23 @@
+{
+"Id participant": "",
+"Path_textures": [
+["SCRIPT\\ABCDEF-ABX-V1.json","SCRIPT\\ABCDEF-ABX-V2.json","SCRIPT\\ABCDEF-ABX-V3.json"],
+["SCRIPT\\AEKBFL-ABX-V1.json","SCRIPT\\AEKBFL-ABX-V2.json","SCRIPT\\AEKBFL-ABX-V3.json"],
+["SCRIPT\\CDGAFK-ABX-V1.json","SCRIPT\\CDGAFK-ABX-V2.json","SCRIPT\\CDGAFK-ABX-V3.json"],
+["SCRIPT\\CGIDHJ-ABX-V1.json","SCRIPT\\CGIDHJ-ABX-V2.json","SCRIPT\\CGIDHJ-ABX-V3.json"],
+["SCRIPT\\EHIJBL-ABX-V1.json","SCRIPT\\EHIJBL-ABX-V2.json","SCRIPT\\EHIJBL-ABX-V3.json"],
+["SCRIPT\\GHIJKL-ABX-V1.json","SCRIPT\\GHIJKL-ABX-V2.json","SCRIPT\\GHIJKL-ABX-V3.json"]
+],
+"Primer": "Cross.png",
+"Primer_time": 0.5,
+"Pic_time": 0.75,
+"White_time": 1,
+"Maxanswer_time": 2,
+"Data_folder": "C:\\Exp",
+"Texture_folder": "ABCDEF3-GOODSIZE",
+"PRATIQUE_folder": "PRATIQUE",
+"PRATIQUE_LIST": [{"TextureB": "kalamite-dist0-pair0-A.png", "TextureA": "lakamite-dist0-pair0-B.png", "X": 2},
+{"TextureB": "kalamite-dist0-pair1-B.png", "TextureA": "kalamite-dist0-pair1-A.png", "X": 1},
+{"TextureB": "lakamite-dist0-pair2-B.png", "TextureA": "lakamite-dist0-pair2-A.png", "X": 2},
+{"TextureB": "kalamite-dist0-pair3-B.png", "TextureA": "lakamite-dist0-pair3-A.png", "X": 1}]
+}
