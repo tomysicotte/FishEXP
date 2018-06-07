@@ -1,0 +1,15 @@
+{
+  "JS_trial" : 0,
+  "N_block": 4,
+  "Trial_per_block" : 5,
+  "Path_texture" : "C:\\Users\\tsico\\Fish\\Hardest - 1 feature\\Resized\\",
+  "Script_path" : "C:\\Users\\tsico\\PycharmProjects\\FishEXP\\",
+  "Cat0_folder": "K\\",
+  "Cat1_folder": "L\\",
+  "Primer": "C:\\Exp\\Cross.png",
+  "Primer_time": 0.5,
+  "Pic_time": 5,
+  "Maxanswer_time": 5,
+  "Français_ins" : "",
+  "English_ins" : ""
+}

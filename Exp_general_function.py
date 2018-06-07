@@ -1,7 +1,8 @@
 from psychopy import data, gui, core, visual, event
+import os
 
 
-def get_info_from_dlg(dict_info) :
+def get_info_from_dlg(dict_info):
     "Return answer as expInfo(dict) for keys in dict_info"
     my_dlg = gui.Dlg(title="Exp Info")
     for key in dict_info :
@@ -14,27 +15,34 @@ def get_info_from_dlg(dict_info) :
     return expInfo
 
 
-def write_instruction(sentence, win, color):
-    """
+def get_practice_stim(practice_path, win):
+    practice_stim = []
+    all_stim = os.listdir(practice_path)
+    for stim in all_stim :
+        this_stim = visual.ImageStim(win, image=practice_path+stim)
+        practice_stim.append(this_stim)
+    return practice_stim
 
+
+def write_instruction(sentence,lower_ins, win, color):
+    """
     Fonction qui affiche un texte et attend pour qu'on appuie sur une touche
     Il y aura une indication d'appuyer sur une touche pour continuer dans le bas.
-
     """
     win = win
     instruction = visual.TextStim(win, text=sentence, pos=(0.0, 0.2), color=color)
     instruction.draw()
-    continuer = visual.TextStim(win, text="Appuyer sur une touche pour continuer", pos=(0.0, -0.6), height=0.07,
+    continuer = visual.TextStim(win, text=lower_ins, pos=(0.0, -0.6), height=0.05,
                                 color=str(color))
     continuer.draw()
     win.flip()
-    thisResp = None
-    while thisResp == None:
-        allKeys = event.waitKeys()
-        for thisKey in allKeys:
+    this_resp = None
+    while this_resp == None:
+        all_keys = event.waitKeys()
+        for thisKey in all_keys:
             if thisKey == "q":
                 core.quit()
-            thisResp = 1
+            this_resp = 1
 
 
 def countdown(directive, temps, win, color):
