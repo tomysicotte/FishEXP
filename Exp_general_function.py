@@ -56,7 +56,7 @@ def countdown(directive, temps, win, color):
     seconds = temps
     directive_text = directive
     while seconds > 0:
-        directive_countdown = visual.TextStim(win, text=directive_text, pos=(0.0, 0.2), color=color)
+        directive_countdown = visual.TextStim(win, text=directive_text, pos=(0.0, 0.2), height=0.6,color=color)
         directive_countdown.draw()
         time_countdown = visual.TextStim(win, text=str(seconds), pos=(0.0, -0.1), height=0.5, color=color)
         time_countdown.draw()

@@ -117,17 +117,19 @@ if __name__ == '__main__':
     if "N_deviant" in params :
         oddball_trials = OddballTrials(params=params, win=win, exp_info=exp_info, txt_ins=txt_ins,
                                        stimulus_list=all_names)
-    """
+
     write_instruction(txt_ins["Intro"], txt_ins["Key_to_continue"], win, "Black")
     if "SJ_trial" in params:
         sj_trials.sj_routine(1)
+    if "N_deviant" in params:
+        oddball_trials.oddball_routine(1)
     cat_trials.categorization_routine()
     if "SJ_trial" in params:
         sj_trials.sj_routine(2)
     if "N_deviant" in params:
-        oddball_trials.oddball_routine()
+        oddball_trials.oddball_routine(2)
     write_instruction(txt_ins["Exp_end"], txt_ins["Key_to_continue"], win, "Black")
-    """
+
     win.close()
     if params["Trial_per_block"] > 0 :
         if exp_info["Exp"] == "Fish" :

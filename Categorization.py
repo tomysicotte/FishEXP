@@ -152,7 +152,6 @@ class CatTrials(object):
 
     def practice_routine(self):
         self.params["EEG"] = False
-        self.pport = False
         for i in range(self.params["N_Cat_Practice"]) :
             x = self.trial(self.practice_stim_list[random.randint(0,len(self.practice_stim_list)-1)], random.randint(0,1))
         if self.pport :
