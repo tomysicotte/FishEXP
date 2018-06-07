@@ -121,6 +121,9 @@ class OddballTrials(object):
                                                autoLog=True)
 
     def oddball_routine(self,block):
+        # Activate saving on BIOSEMI (need to be added in BIOSEMI config)
+        if self.params["EEG"]:
+            self.pport.send_signal(254)
         for i,trial_structure in enumerate(self.oddball_trials_structure):
             # Write instruction according to trial number
             if i == 0 :
@@ -139,7 +142,7 @@ class OddballTrials(object):
             if self.stim_trials_list[i][0][1][0] == self.stim_trials_list[i][1][1][0]:
                 trial_type = "Same"
 
-            rts = self.oddball_trial(trial_structure, self.stim_trials_list[i], trial_type)
+            rts = self.oddball_trial(trial_structure, self.stim_trials_list[i], trial_type, block)
             for rt in rts:
                 self.oddball_data.addData("RT", rt)
                 self.oddball_data.addData("Type", trial_type)
@@ -148,7 +151,11 @@ class OddballTrials(object):
                 self.oddball_data.addData("Block", block)
                 self.oddball_data.nextEntry()
 
-    def oddball_trial(self, structure, trial_stim, trial_type):
+        # Deactivate saving on BIOSEMI (need to be added in BIOSEMI config)
+        if self.params["EEG"]:
+            self.pport.send_signal(255)
+
+    def oddball_trial(self, structure, trial_stim, trial_type, block):
         """
         :param structure: List of int for the order of the trial
         :param trial_stim: [[main.image, main name],[deviant.image, deviant name]]
@@ -158,8 +165,6 @@ class OddballTrials(object):
         standard = trial_stim[0][0]
         deviant = trial_stim[1][0]
         key_resp = event.BuilderKeyResponse()
-        if self.params["EEG"]:
-            self.pport.send_signal(79)
 
         # Modify trigger according to trial type
         eeg_val_modifier = 0
@@ -208,19 +213,19 @@ class OddballTrials(object):
                 # 92 Different and target
                 if structure[i] == 2:
                     if self.params["EEG"]:
-                        self.pport.send_signal(82+eeg_val_modifier)
+                        self.pport.send_signal(82+eeg_val_modifier+(block-1)*100)
                     standard.setAutoDraw(True)
                     self.target.setAutoDraw(True)
                     target_time.append(t)
                 elif structure[i] == 0 :
                     if self.params["EEG"]:
-                        self.pport.send_signal(80+eeg_val_modifier)
+                        self.pport.send_signal(80+eeg_val_modifier+(block-1)*100)
                     standard.setAutoDraw(True)
                     self.fixation_cross_vertical.setAutoDraw(True)
                     self.fixation_cross_horizontal.setAutoDraw(True)
                 elif structure[i] == 1 :
                     if self.params["EEG"] :
-                        self.pport.send_signal(81+eeg_val_modifier)
+                        self.pport.send_signal(81+eeg_val_modifier+(block-1)*100)
                     deviant.setAutoDraw(True)
                     self.fixation_cross_vertical.setAutoDraw(True)
                     self.fixation_cross_horizontal.setAutoDraw(True)

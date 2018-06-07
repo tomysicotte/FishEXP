@@ -139,10 +139,11 @@ class sj_trials(object):
         :param block: Determine which block is it
         Routine for 1 block of similarity judgement
         """
-        # Write instruction and practice if it's block 1
+        # Activate saving on BIOSEMI (need to be added in BIOSEMI config)
         if self.params["EEG"]:
-            self.pport.send_signal(70+block)
+            self.pport.send_signal(254)
 
+        # Write instruction and practice if it's block 1
         if block == 1 :
             write_instruction(self.txt_ins["SJ_ins1"], self.txt_ins["Key_to_continue"], self.win, "Black")
             write_instruction(self.txt_ins["SJ_ins2"], self.txt_ins["Key_to_continue"], self.win, "Black")
@@ -165,7 +166,7 @@ class sj_trials(object):
             stim1 = self.sj_trials_list[n]["stim1"]
             stim2 = self.sj_trials_list[n]["stim2"]
             trial_type = self.sj_trials_list[n]["type"]
-            trial = self.trial([stim1, stim2], trial_type, stim1_cat)
+            trial = self.trial([stim1, stim2], trial_type, stim1_cat,block)
 
             #Add data to this entry
             self.sj_data.addData("Block", block)
@@ -181,6 +182,10 @@ class sj_trials(object):
             self.sj_data.addData("Stim1", stim1_name)
             self.sj_data.addData("Stim2", stim2_name)
             self.sj_data.nextEntry()
+
+        # Deactivate saving on BIOSEMI (need to be added in BIOSEMI config)
+        if self.params["EEG"]:
+            self.pport.send_signal(255)
 
     def sj_answer(self) :
         """
@@ -223,7 +228,7 @@ class sj_trials(object):
         self.txt_diff.setAutoDraw(False)
         return score
 
-    def trial(self, stim_pair,trial_type, stim1_cat) :
+    def trial(self, stim_pair,trial_type, stim1_cat,block) :
         """
         :param stim_pair: [Stim1.image, Stim2.image]
         :param trial_type: "Same" or "Different"
@@ -258,11 +263,11 @@ class sj_trials(object):
                     if trial_type == "Same" :
                         val_type = 10
                     # Trigger identification
-                    # 101 Category 1 and same
-                    # 111 Category 1 and diff
-                    # 201 Category 2 and same
-                    # 211 Category 2 and diff
-                    self.pport.send_signal((int(stim1_cat)+1)*100 + val_type+1)
+                    # 101 or 103 Category 1 and same
+                    # 111 or 113 Category 1 and diff
+                    # 201 or 203 Category 2 and same
+                    # 211 or 213 Category 2 and diff
+                    self.pport.send_signal((int(stim1_cat)+1)*100 + val_type+1+(block-1)*2)
             elif t > self.primer_time + self.stimulus_time and stim1.status == STARTED : # Hide stim1
                 stim1.setAutoDraw(False)
                 stim1.status = STOPPED
@@ -275,11 +280,11 @@ class sj_trials(object):
                     if trial_type == "Same" :
                         val_type = 10
                     # Trigger identification
-                    # 102 Category 1 and same
-                    # 112 Category 1 and diff
-                    # 202 Category 2 and same
-                    # 212 Category 2 and diff
-                    self.pport.send_signal((int(stim1_cat)+1)*100 + val_type+1)
+                    # 102 or 104 Category 1 and same
+                    # 112 or 114 Category 1 and diff
+                    # 202 or 204 Category 2 and same
+                    # 212 or 214 Category 2 and diff
+                    self.pport.send_signal((int(stim1_cat)+1)*100 + val_type+2(block-1)*2)
             elif t > self.primer_time + self.stimulus_time*2 + self.between_stim_time and stim2.status == STARTED:
                 # Hide stim2
                 stim2.setAutoDraw(False)

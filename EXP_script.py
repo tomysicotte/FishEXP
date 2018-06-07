@@ -38,28 +38,43 @@ EEG trigger identification :
             51 Stimulus Category 2 and good
     
     Similarity judgement
-        New Block
-            71 Block 1
-            72 Block 2
         Stimulus appearance
-            101 Stimulus 1 Category 1 and same
-            111 Stimulus 1 Category 1 and diff
-            201 Stimulus 1 Category 2 and same
-            211 Stimulus 1 Category 2 and diff
-            102 Stimulus 2 Category 1 and same
-            112 Stimulus 2 Category 1 and diff
-            202 Stimulus 2 Category 2 and same
-            212 Stimulus 2 Category 2 and diff
+            101 Stimulus 1 Category 1 and same  1st JS
+            111 Stimulus 1 Category 1 and diff  1st JS
+            201 Stimulus 1 Category 2 and same  1st JS
+            211 Stimulus 1 Category 2 and diff  1st JS
+            102 Stimulus 2 Category 1 and same  1st JS
+            112 Stimulus 2 Category 1 and diff  1st JS
+            202 Stimulus 2 Category 2 and same  1st JS
+            212 Stimulus 2 Category 2 and diff  1st JS
+            103 Stimulus 1 Category 1 and same  2nd JS
+            113 Stimulus 1 Category 1 and diff  2nd JS
+            203 Stimulus 1 Category 2 and same  2nd JS
+            213 Stimulus 1 Category 2 and diff  2nd JS
+            104 Stimulus 2 Category 1 and same  2nd JS
+            114 Stimulus 2 Category 1 and diff  2nd JS
+            204 Stimulus 2 Category 2 and same  2nd JS
+            214 Stimulus 2 Category 2 and diff  2nd JS
+            
+            
+            
+            
     Oddball
-        Trial beginning
-            79 New trial
         Stimulus appearance
-            80 Type Same and main
-            81 Type Same and distractor
-            82 Type Same and target
-            90 Type Different and main
-            91 Type Different and distractor
-            92 Type Different and target
+            Oddball #1
+                80 Type Same and main
+                81 Type Same and distractor
+                82 Type Same and target
+                90 Type Different and main
+                91 Type Different and distractor
+                92 Type Different and target
+            Oddball #2
+                180 Type Same and main
+                181 Type Same and distractor
+                182 Type Same and target
+                190 Type Different and main
+                191 Type Different and distractor
+                192 Type Different and target
 """
 
 if __name__ == '__main__':

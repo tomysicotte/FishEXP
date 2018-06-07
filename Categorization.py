@@ -158,6 +158,10 @@ class CatTrials(object):
             self.params["EEG"] = True
 
     def categorization_routine(self):
+        # Activate saving on BIOSEMI (need to be added in BIOSEMI config)
+        if self.params["EEG"]:
+            self.pport.send_signal(254)
+
         # Write instruction and practice if it's block 1
         write_instruction(self.txt_ins["Cat_ins1"], self.txt_ins["Key_to_continue"],self.win, "Black")
         write_instruction(self.txt_ins["Cat_ins2"], self.txt_ins["Key_to_continue"],self.win, "Black")
@@ -198,6 +202,10 @@ class CatTrials(object):
                     self.cat_data.addData("Orientation", stim_orientation)
 
                 self.cat_data.nextEntry()
+
+        # Deactivate saving on BIOSEMI (need to be added in BIOSEMI config)
+        if self.params["EEG"]:
+            self.pport.send_signal(255)
 
         write_instruction(self.txt_ins["Cat_end"], self.txt_ins["Key_to_continue"],self.win, "Black")
 
